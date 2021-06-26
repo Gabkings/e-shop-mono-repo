@@ -19,12 +19,31 @@
     }
   },
   "projects": {
+    "admin": {
+      "tags": []
+    },
+    "admin-e2e": {
+      "tags": [],
+      "implicitDependencies": ["admin"]
+    },
     "e-shop": {
       "tags": []
     },
     "e-shop-e2e": {
       "tags": [],
       "implicitDependencies": ["e-shop"]
+    },
+    "orders": {
+      "tags": []
+    },
+    "products": {
+      "tags": []
+    },
+    "ui": {
+      "tags": []
+    },
+    "users": {
+      "tags": []
     }
   }
 }
