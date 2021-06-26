@@ -8,6 +8,7 @@ import {Route, RouterModule, Routes} from "@angular/router";
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
 import {UiModule} from "../../../../libs/ui/src/lib/ui.module";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 const route = [
@@ -17,7 +18,7 @@ const route = [
 
 @NgModule({
   declarations: [AppComponent, HomePageComponent, ProductsListComponent, FooterComponent, HeaderComponent],
-  imports: [BrowserModule, RouterModule.forRoot(route), UiModule],
+  imports: [BrowserModule,BrowserAnimationsModule, RouterModule.forRoot(route), UiModule],
   providers: [],
   bootstrap: [AppComponent],
 })
