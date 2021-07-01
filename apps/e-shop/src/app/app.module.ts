@@ -11,6 +11,7 @@ import {UiModule} from "../../../../libs/ui/src/lib/ui.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
+
 const route = [
   {path: "", component: HomePageComponent},
   {path: "products", component: ProductsListComponent}
