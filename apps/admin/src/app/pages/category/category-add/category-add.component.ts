@@ -36,12 +36,6 @@ export class CategoryAddComponent implements OnInit {
     this._checkEditMode()
   }
 
-  categoryData: CategoryModel = {
-    name: "",
-    icon: "",
-    color: ""
-  }
-
   /*
   @comment: Success message toast
    */
@@ -58,7 +52,7 @@ export class CategoryAddComponent implements OnInit {
     const payload : CategoryModel = {
       name : this.categoryForm.name.value,
       icon : this.categoryForm.icon.value,
-      color: "#FFF"
+      color: this.categoryForm.color.value
     }
     this.createCategory(payload)
   }
