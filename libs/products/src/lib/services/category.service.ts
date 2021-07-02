@@ -3,8 +3,10 @@ import {HttpClient} from "@angular/common/http";
 import {CategoryModel} from "../models/categoryModel";
 import {Observable} from "rxjs";
 
+import {environment} from "@env/environment"
 
-const apiUrl = "http://localhost:3000/api/v1/categories"
+
+const apiUrl = environment.appUrl+'/categories'
 
 
 @Injectable({
@@ -21,18 +23,18 @@ export class CategoryService {
   }
 
   createCategory(payload: CategoryModel) :Observable<CategoryModel> {
-    return this.httpClient.post<CategoryModel>("http://localhost:3000/api/v1/categories", payload)
+    return this.httpClient.post<CategoryModel>(`${apiUrl}`, payload)
   }
 
   deleteCategory(categoryId: string) : Observable<string>{
-    return this.httpClient.delete<string>(`http://localhost:3000/api/v1/categories/${categoryId}`)
+    return this.httpClient.delete<string>(`${apiUrl}/${categoryId}`)
   }
   getById(categoryId: string) : Observable<CategoryModel>{
-    return this.httpClient.get<CategoryModel>(`http://localhost:3000/api/v1/categories/${categoryId}`)
+    return this.httpClient.get<CategoryModel>(`${apiUrl}/${categoryId}`)
   }
 
   updateById(categoryId: string, payload: CategoryModel) : Observable<string>{
-    return this.httpClient.put<string>(`http://localhost:3000/api/v1/categories/${categoryId}`, payload)
+    return this.httpClient.put<string>(`${apiUrl}/${categoryId}`, payload)
   }
 
 }
