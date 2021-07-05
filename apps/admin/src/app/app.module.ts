@@ -12,7 +12,7 @@ import {ToolbarModule} from 'primeng/toolbar';
 import {ButtonModule} from "primeng/button";
 import {SplitButtonModule} from "primeng/splitbutton";
 import {TableModule} from 'primeng/table';
-import {CategoryService} from "@frontend/products";
+import {CategoryService, ProductService} from "@frontend/products";
 import {HttpClientModule} from "@angular/common/http";
 import { CategoryAddComponent } from './pages/category/category-add/category-add.component';
 import {InputTextModule} from 'primeng/inputtext';
@@ -22,6 +22,17 @@ import {ToastModule} from 'primeng/toast';
 import {ConfirmationService, MessageService} from "primeng/api";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { UsersListComponent } from './pages/users/users-list/users-list.component';
+import { UserFormComponent } from './pages/users/user-form/user-form.component';
+import {UsersService} from "../../../../libs/users/src/lib/services/users.service";
+import {TagModule} from "primeng/tag";
+import {InputSwitchModule} from "primeng/inputswitch";
+import {InputMaskModule} from "primeng/inputmask";
+import {DropdownModule} from "primeng/dropdown";
+import { ProductListComponent } from './pages/products/product-list/product-list.component';
+import { ProductFormComponent } from './pages/products/product-form/product-form.component';
+import {InputNumberModule} from "primeng/inputnumber";
+import {EditorModule} from "primeng/editor";
 
 
 
@@ -30,20 +41,50 @@ const routes: Routes = [
     children: [
       {path: "dashboard", component: DashboardComponent},
       {path: "category", component: CategoryListComponent},
+      {path: "products", component: ProductListComponent},
+      {path: "products/form", component: ProductFormComponent},
+      {path: "products/form/:id", component: ProductFormComponent},
       {path: "category/form", component: CategoryAddComponent},
       {path: "category/form/:id", component: CategoryAddComponent},
+      {path: "users", component: UsersListComponent},
+      {path: "users/form", component: UserFormComponent},
+      {path: "users/form/:id", component: UserFormComponent},
     ]
   }
 ];
 
 @NgModule({
-  declarations: [AppComponent, ShellComponent, SidebarComponent, DashboardComponent, CategoryListComponent, CategoryAddComponent],
+  declarations: [AppComponent,
+    ShellComponent,
+    SidebarComponent,
+    DashboardComponent,
+    CategoryListComponent,
+    CategoryAddComponent,
+    UsersListComponent,
+    UserFormComponent,
+    ProductListComponent,
+    ProductFormComponent],
   imports: [
-    BrowserModule, HttpClientModule,BrowserAnimationsModule,ConfirmDialogModule,
+    BrowserModule, HttpClientModule, BrowserAnimationsModule, ConfirmDialogModule,
     RouterModule.forRoot(routes, {initialNavigation: 'enabled'}),
-    CardModule, ToolbarModule, ButtonModule, SplitButtonModule, TableModule, InputTextModule, ColorPickerModule, FormsModule, ReactiveFormsModule, ToastModule
+    CardModule,
+    ToolbarModule,
+    ButtonModule,
+    SplitButtonModule,
+    TableModule,
+    InputTextModule,
+    ColorPickerModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ToastModule,
+    TagModule,
+    InputSwitchModule,
+    InputMaskModule,
+    DropdownModule,
+    InputNumberModule,
+    EditorModule
   ],
-  providers: [CategoryService, MessageService, ConfirmationService],
+  providers: [CategoryService, MessageService, ConfirmationService, UsersService, ProductService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
