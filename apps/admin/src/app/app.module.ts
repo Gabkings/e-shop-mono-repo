@@ -33,6 +33,10 @@ import { ProductListComponent } from './pages/products/product-list/product-list
 import { ProductFormComponent } from './pages/products/product-form/product-form.component';
 import {InputNumberModule} from "primeng/inputnumber";
 import {EditorModule} from "primeng/editor";
+import {OrderListComponent} from "./pages/orders/order-list/order-list.component";
+import {OrderDetailComponent} from "./pages/orders/order-detail/order-detail.component";
+import {OrdersService} from "@frontend/orders";
+import {FieldsetModule} from "primeng/fieldset";
 
 
 
@@ -42,6 +46,8 @@ const routes: Routes = [
       {path: "dashboard", component: DashboardComponent},
       {path: "category", component: CategoryListComponent},
       {path: "products", component: ProductListComponent},
+      {path: "orders", component: OrderListComponent},
+      {path: "orders/:id", component: OrderDetailComponent},
       {path: "products/form", component: ProductFormComponent},
       {path: "products/form/:id", component: ProductFormComponent},
       {path: "category/form", component: CategoryAddComponent},
@@ -63,7 +69,9 @@ const routes: Routes = [
     UsersListComponent,
     UserFormComponent,
     ProductListComponent,
-    ProductFormComponent],
+    ProductFormComponent,
+    OrderListComponent,
+    OrderDetailComponent],
   imports: [
     BrowserModule, HttpClientModule, BrowserAnimationsModule, ConfirmDialogModule,
     RouterModule.forRoot(routes, {initialNavigation: 'enabled'}),
@@ -82,9 +90,9 @@ const routes: Routes = [
     InputMaskModule,
     DropdownModule,
     InputNumberModule,
-    EditorModule
+    EditorModule, FieldsetModule
   ],
-  providers: [CategoryService, MessageService, ConfirmationService, UsersService, ProductService],
+  providers: [CategoryService, MessageService, ConfirmationService, UsersService, ProductService, OrdersService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
