@@ -37,4 +37,9 @@ export class UsersService {
     return this.httpClient.put<string>(`${apiUrl}/${userId}`, payload)
   }
 
+  getUsersCount() : Observable<any>{
+    return this.httpClient.get<any>(`${apiUrl}/get/count`)
+  }
+
+
 }

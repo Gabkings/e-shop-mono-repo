@@ -9,6 +9,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
 import {UiModule} from "../../../../libs/ui/src/lib/ui.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {NavComponent} from "./shared/nav/nav.component";
 
 
 
@@ -18,7 +19,7 @@ const route = [
   ];
 
 @NgModule({
-  declarations: [AppComponent, HomePageComponent, ProductsListComponent, FooterComponent, HeaderComponent],
+  declarations: [AppComponent, HomePageComponent, ProductsListComponent, FooterComponent, HeaderComponent, NavComponent],
   imports: [BrowserModule,BrowserAnimationsModule, RouterModule.forRoot(route), UiModule],
   providers: [],
   bootstrap: [AppComponent],

@@ -24,6 +24,7 @@ shared scss
 
 
 @import "./apps/admin/shared/shell";
+@import "./apps/admin/dashboard/dashboard";
 /*
 Apps scss
  */
@@ -33,3 +34,4 @@ libs scss
  */
 
 @import "./libs/ui/ui";
+@import "./libs/users/login-register";

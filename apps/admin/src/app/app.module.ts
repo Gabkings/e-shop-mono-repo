@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
-import {RouterModule, Routes} from '@angular/router';
 import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -13,7 +11,7 @@ import {ButtonModule} from "primeng/button";
 import {SplitButtonModule} from "primeng/splitbutton";
 import {TableModule} from 'primeng/table';
 import {CategoryService, ProductService} from "@frontend/products";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { CategoryAddComponent } from './pages/category/category-add/category-add.component';
 import {InputTextModule} from 'primeng/inputtext';
 import {ColorPickerModule} from 'primeng/colorpicker';
@@ -37,27 +35,12 @@ import {OrderListComponent} from "./pages/orders/order-list/order-list.component
 import {OrderDetailComponent} from "./pages/orders/order-detail/order-detail.component";
 import {OrdersService} from "@frontend/orders";
 import {FieldsetModule} from "primeng/fieldset";
+import {UsersModule} from "../../../../libs/users/src/lib/users.module";
+import {JwtInterceptor} from "@frontend/users";
+import {appRoutingModule} from "./app.routing-module";
+import {ChartModule} from "primeng/chart";
+import {NavComponent} from "./shared/nav/nav.component";
 
-
-
-const routes: Routes = [
-  {path: "", component: ShellComponent,
-    children: [
-      {path: "dashboard", component: DashboardComponent},
-      {path: "category", component: CategoryListComponent},
-      {path: "products", component: ProductListComponent},
-      {path: "orders", component: OrderListComponent},
-      {path: "orders/:id", component: OrderDetailComponent},
-      {path: "products/form", component: ProductFormComponent},
-      {path: "products/form/:id", component: ProductFormComponent},
-      {path: "category/form", component: CategoryAddComponent},
-      {path: "category/form/:id", component: CategoryAddComponent},
-      {path: "users", component: UsersListComponent},
-      {path: "users/form", component: UserFormComponent},
-      {path: "users/form/:id", component: UserFormComponent},
-    ]
-  }
-];
 
 @NgModule({
   declarations: [AppComponent,
@@ -71,28 +54,33 @@ const routes: Routes = [
     ProductListComponent,
     ProductFormComponent,
     OrderListComponent,
-    OrderDetailComponent],
-  imports: [
-    BrowserModule, HttpClientModule, BrowserAnimationsModule, ConfirmDialogModule,
-    RouterModule.forRoot(routes, {initialNavigation: 'enabled'}),
-    CardModule,
-    ToolbarModule,
-    ButtonModule,
-    SplitButtonModule,
-    TableModule,
-    InputTextModule,
-    ColorPickerModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ToastModule,
-    TagModule,
-    InputSwitchModule,
-    InputMaskModule,
-    DropdownModule,
-    InputNumberModule,
-    EditorModule, FieldsetModule
+    OrderDetailComponent,
+    NavComponent
   ],
-  providers: [CategoryService, MessageService, ConfirmationService, UsersService, ProductService, OrdersService],
+    imports: [
+        BrowserModule, HttpClientModule, BrowserAnimationsModule, ConfirmDialogModule,
+        appRoutingModule,
+        UsersModule,
+        CardModule,
+        ToolbarModule,
+        ButtonModule,
+        SplitButtonModule,
+        TableModule,
+        InputTextModule,
+        ColorPickerModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ToastModule,
+        TagModule,
+        InputSwitchModule,
+        InputMaskModule,
+        DropdownModule,
+        InputNumberModule,
+        EditorModule, FieldsetModule, ChartModule
+    ],
+  providers: [CategoryService, MessageService, ConfirmationService, UsersService, ProductService, OrdersService,
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

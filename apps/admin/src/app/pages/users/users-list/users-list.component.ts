@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ConfirmationService, MessageService} from "primeng/api";
 import {Router} from "@angular/router";
 import {UserModel} from "../../../../../../../libs/users/src/lib/models/userModel";
 import {UsersService} from "../../../../../../../libs/users/src/lib/services/users.service";
+import {Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'frontend-users-list',
-  templateUrl: './users-list.component.html',
-  styleUrls: ['./users-list.component.css']
+  templateUrl: './users-list.component.html'
 })
-export class UsersListComponent implements OnInit {
+export class UsersListComponent implements OnInit, OnDestroy {
 
   users: UserModel[] = []
+  endsubs$: Subject<any> = new Subject<any>();
   constructor(private userSvs: UsersService,
               private messageService: MessageService,
               private confirmationService: ConfirmationService,
@@ -23,8 +25,13 @@ export class UsersListComponent implements OnInit {
     this.showUsers()
   }
 
+
+  ngOnDestroy(): void {
+    this.endsubs$.complete()
+  }
+
   showUsers(){
-    this.userSvs.getUsers().subscribe(data => {
+    this.userSvs.getUsers().pipe(takeUntil(this.endsubs$)).subscribe(data => {
       this.users = data
     })
   }
@@ -34,7 +41,7 @@ export class UsersListComponent implements OnInit {
       message: 'Are you sure that you want to perform this action?',
       accept: () => {
         //Actual logic to perform a confirmation
-        this.userSvs.deleteUser(categoryId).subscribe(response => {
+        this.userSvs.deleteUser(categoryId).pipe(takeUntil(this.endsubs$)).subscribe(response => {
           this.showUsers()
           this.messageService.add({severity:"success", summary:"Deletion successful", detail: ""})
         }, error => {

@@ -31,4 +31,8 @@ export class ProductService{
   deleteProduct(productId: string): Observable<any> {
     return this.http.delete<any>(`${apiUrl}/${productId}`);
   }
+
+  getProductsCount(): Observable<any>{
+    return this.http.get<any>(`${apiUrl}/count/products`)
+  }
 }

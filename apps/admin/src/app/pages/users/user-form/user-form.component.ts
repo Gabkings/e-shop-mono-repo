@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MessageService} from "primeng/api";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UsersService} from "../../../../../../../libs/users/src/lib/services/users.service";
 import {ActivatedRoute} from "@angular/router";
 import {UserModel} from "../../../../../../../libs/users/src/lib/models/userModel";
-import {timer} from "rxjs";
+import {Subject, timer} from "rxjs";
 import {Location} from "@angular/common";
 
 import * as countryLib from 'i18n-iso-countries'
@@ -13,12 +13,13 @@ import * as countryLib from 'i18n-iso-countries'
 
 
 import i18n_iso_countries from "i18n-iso-countries/langs/en.json";
+import {takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'frontend-user-form',
   templateUrl: './user-form.component.html'
 })
-export class UserFormComponent implements OnInit {
+export class UserFormComponent implements OnInit, OnDestroy {
 
   declare  require: (arg0: string) => countryLib.LocaleData;
 
@@ -39,7 +40,7 @@ export class UserFormComponent implements OnInit {
   currentUserId: string = '';
   countries:{ name: string; id: string }[] = [];
 
-
+  endsubs$: Subject<any> = new Subject<any>();
 
   constructor(
     private messageService: MessageService,
@@ -48,6 +49,11 @@ export class UserFormComponent implements OnInit {
     private location: Location,
     private route: ActivatedRoute
   ) {}
+
+
+  ngOnDestroy(): void {
+    this.endsubs$.complete()
+  }
 
   ngOnInit(): void {
     //this._initUserForm();
@@ -72,7 +78,7 @@ export class UserFormComponent implements OnInit {
 
   private _addUser(user: UserModel) {
 
-    this.usersService.createUser(user).subscribe(data =>{
+    this.usersService.createUser(user).pipe(takeUntil(this.endsubs$)).subscribe(data =>{
       this.messageService.add({severity:"success", summary:"Adding successful", detail: ""})
         timer(2000).toPromise().then(done => {
           this.location.back()
@@ -82,7 +88,7 @@ export class UserFormComponent implements OnInit {
   }
 
   private _updateUser(userId: string , user: UserModel) {
-    this.usersService.updateUser(userId,user).subscribe(
+    this.usersService.updateUser(userId,user).pipe(takeUntil(this.endsubs$)).subscribe(
       () => {
         this.messageService.add({
           severity: 'success',
@@ -110,7 +116,7 @@ export class UserFormComponent implements OnInit {
       if (params.id) {
         this.editmode = true;
         this.currentUserId = params.id;
-        this.usersService.getUserById(params.id).subscribe((user) => {
+        this.usersService.getUserById(params.id).pipe(takeUntil(this.endsubs$)).subscribe((user) => {
           this.userForm.name.setValue(user.name);
           this.userForm.email.setValue(user.email);
           this.userForm.phone.setValue(user.phone);
@@ -147,7 +153,7 @@ export class UserFormComponent implements OnInit {
       apartment: this.userForm.apartment.value,
       zip: this.userForm.zip.value,
       city: this.userForm.city.value,
-      country: this.userForm.country.value
+      country: this.userForm.country.value,
     };
     if (this.editmode) {
       this._updateUser(this.currentUserId,user);
