@@ -35,4 +35,8 @@ export class ProductService{
   getProductsCount(): Observable<any>{
     return this.http.get<any>(`${apiUrl}/count/products`)
   }
+
+  getFeaturedProducts(count : number): Observable<ProductModel[]>{
+    return this.http.get<ProductModel[]>(`${apiUrl}/get/featured/${count}`)
+  }
 }

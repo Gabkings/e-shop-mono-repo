@@ -10,6 +10,14 @@ import { HeaderComponent } from './shared/header/header.component';
 import {UiModule} from "../../../../libs/ui/src/lib/ui.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NavComponent} from "./shared/nav/nav.component";
+import {
+  CategoriesBannerComponent,
+  FeaturedProductComponent,
+  ProductItemComponent,
+  ProductsModule,
+  SearchComponent
+} from "@frontend/products";
+import {ButtonModule} from "primeng/button";
 
 
 
@@ -19,8 +27,12 @@ const route = [
   ];
 
 @NgModule({
-  declarations: [AppComponent, HomePageComponent, ProductsListComponent, FooterComponent, HeaderComponent, NavComponent],
-  imports: [BrowserModule,BrowserAnimationsModule, RouterModule.forRoot(route), UiModule],
+  declarations: [AppComponent, HomePageComponent,
+    ProductsListComponent,
+    FooterComponent,
+    HeaderComponent,
+    NavComponent, SearchComponent, CategoriesBannerComponent],
+  imports: [BrowserModule, BrowserAnimationsModule, RouterModule.forRoot(route), UiModule, ProductsModule, ButtonModule],
   providers: [],
   bootstrap: [AppComponent],
 })
