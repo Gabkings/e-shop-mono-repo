@@ -14,7 +14,7 @@ export class FeaturedProductComponent implements OnInit, OnDestroy {
   }
 
   featuredProducts: ProductModel[] = []
-  count: number = 3
+  count: number = 6
 
   endSubs$: Subject<any> = new Subject();
 
@@ -24,7 +24,6 @@ export class FeaturedProductComponent implements OnInit, OnDestroy {
 
   private _getFeaturedProducts(countNo: number) {
     this.productSvs.getFeaturedProducts(countNo).pipe(takeUntil(this.endSubs$)).subscribe(data => {
-      console.log(data)
         this.featuredProducts = data
     }, error => console.log(error.message))
   }

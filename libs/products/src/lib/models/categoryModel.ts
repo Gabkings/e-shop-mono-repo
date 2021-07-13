@@ -4,4 +4,5 @@ export class CategoryModel{
   color? : string;
   icon? : string;
   message?: string;
+  checked?: boolean=false;
 }

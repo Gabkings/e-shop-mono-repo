@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { SliderComponent } from './slider/slider.component';
 import { BannerComponent } from './banner/banner.component';
 import {ButtonModule} from "primeng/button";
+import {GalaryComponent} from "./galary/galary-component";
 
 
 
 @NgModule({
   declarations: [
     SliderComponent,
-    BannerComponent
+    BannerComponent, GalaryComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +18,7 @@ import {ButtonModule} from "primeng/button";
   ],
   exports: [
     SliderComponent,
-    BannerComponent
+    BannerComponent, GalaryComponent
   ]
 })
 export class UiModule { }

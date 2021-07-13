@@ -5,9 +5,6 @@ import {LocalStorageService} from "./localStorage.service";
 import {environment} from "@env/environment";
 
 
-class LocalstorageService {
-}
-
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 

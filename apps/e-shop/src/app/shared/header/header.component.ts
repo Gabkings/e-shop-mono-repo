@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CartService} from "@frontend/orders";
 
 @Component({
   selector: 'frontend-header',
@@ -6,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cartSvs: CartService) { }
 
   ngOnInit(): void {
+    this.cartSvs.initialCart()
   }
 
 }

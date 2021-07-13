@@ -11,6 +11,26 @@
           "builder": "@angular-devkit/build-angular:browser",
           "outputs": ["{options.outputPath}"],
           "options": {
+            "allowedCommonJsDependencies": [
+              "uuid",
+              "ulid",
+              "lodash/get",
+              "lodash/isEmpty",
+              "lodash/isEqual",
+              "@aws-amplify/core",
+              "buffer",
+              "i18n-iso-countries",
+              "@aws-crypto/sha256-js",
+              "crypto-js/hmac-sha256",
+              "crypto-js/lib-typedarrays",
+              "zen-observable",
+              "js-cookie",
+              "isomorphic-unfetch",
+              "@aws-crypto/crc32",
+              "fast-xml-parser",
+              "@aws-crypto/sha256-browser",
+              "axios"
+            ],
             "outputPath": "dist/apps/admin",
             "index": "apps/admin/src/index.html",
             "main": "apps/admin/src/main.ts",
@@ -134,7 +154,7 @@
             "tsConfig": "apps/e-shop/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["apps/e-shop/src/favicon.ico", "apps/e-shop/src/assets"],
-            "styles": ["apps/e-shop/src/styles.scss",
+            "styles": ["apps/e-shop/src/styles.scss"
             ],
             "scripts": []
           },
