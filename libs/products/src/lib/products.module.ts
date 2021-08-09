@@ -27,16 +27,17 @@ const route = [
   declarations: [SearchComponent, CategoriesBannerComponent,FeaturedProductComponent, ProductItemComponent, ProductsListComponent, ProductPageComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(route),
     OrdersModule,
+    UiModule,
+    RouterModule.forChild(route),
     ButtonModule,
     HttpClientModule,
     CheckboxModule,
     FormsModule,
     FormsModule,
     RatingModule,
-    InputNumberModule,
-    UiModule
+    InputNumberModule
+
   ],
   exports: [SearchComponent, CategoriesBannerComponent ,FeaturedProductComponent,ProductItemComponent,ProductsListComponent, ProductPageComponent],
 
